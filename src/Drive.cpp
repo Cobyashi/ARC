@@ -1,4 +1,5 @@
 #include "Drive.h"
+#include "Odom.h"
 
 /// @brief Constructor
 /// @param left_drive Left side motors of the drive base
@@ -52,11 +53,11 @@ void Drive::drive_distance(float distance)
 {
     PID drive_PID(0.9, 0.01, 1.5, 100);
     
-    float start_left_position = deg_to_inches(left_drive.position(degrees));
-    float start_right_position = deg_to_inches(right_drive.position(degrees));
+    float start_left_position = deg_to_inches(forward1.position(degrees));
+    float start_right_position = deg_to_inches(forward2.position(degrees));
 
-    float current_left_position = deg_to_inches(left_drive.position(degrees));
-    float current_right_position = deg_to_inches(right_drive.position(degrees));
+    float current_left_position = deg_to_inches(forward1.position(degrees));
+    float current_right_position = deg_to_inches(forward2.position(degrees));
 
     float average_distance = (current_left_position + current_right_position) / 2;
 
@@ -65,8 +66,8 @@ void Drive::drive_distance(float distance)
     //  While loop should end when PID is complete
     while(!drive_PID.isSettled())
     {
-        current_left_position =  deg_to_inches(left_drive.position(degrees)) - start_left_position;
-        current_right_position = deg_to_inches(right_drive.position(degrees)) - start_right_position;
+        current_left_position =  deg_to_inches(forward1.position(degrees)) - start_left_position;
+        current_right_position = deg_to_inches(forward2.position(degrees)) - start_right_position;
 
         average_distance = (current_left_position + current_right_position) / 2;
         float error = distance - average_distance;

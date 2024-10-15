@@ -17,3 +17,7 @@ extern motor LBack;
 
 extern inertial inertial1;
 extern inertial inertial2;
+
+extern rotation forward1;
+extern rotation forward2;
+extern rotation lateral;

@@ -11,6 +11,7 @@ motor LBack = motor(PORT10, ratio36_1, true);
 inertial inertial1 = inertial(PORT16);
 inertial inertial2 = inertial(PORT17);
 
-rotation forward = rotation(PORT12, false);
-rotation lateral = rotation(PORT13, false);
+rotation forward1 = rotation(PORT12, false);
+rotation forward2 = rotation(PORT13, false);
+rotation lateral = rotation(PORT14, false);
 
