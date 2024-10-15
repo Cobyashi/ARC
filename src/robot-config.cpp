@@ -11,7 +11,6 @@ motor LBack = motor(PORT10, ratio36_1, true);
 inertial inertial1 = inertial(PORT16);
 inertial inertial2 = inertial(PORT17);
 
-encoder forwardRight = encoder(Brain.ThreeWirePort.A);
-encoder forwardLeft = encoder(Brain.ThreeWirePort.C);
-encoder lateral = encoder(Brain.ThreeWirePort.E);
+rotation forward = rotation(PORT12, false);
+rotation lateral = rotation(PORT13, false);
 
