@@ -25,6 +25,7 @@ void pre_auton(void) {
 
 void autonomous(void) {
 
+wait(2, sec);
  
 chassis.drive_distance(30);
 
