@@ -13,6 +13,9 @@ using namespace vex;
 
 // A global instance of competition
 competition Competition;
+Debug debug;
+
+std::ofstream ofs;
 
 Drive chassis(motor_group(LBack, LFront), motor_group(RBack, RFront), 3.25, 12);
 
@@ -26,8 +29,6 @@ void pre_auton(void) {
 
 
 void autonomous(void) {
- 
-//chassis.drive_distance(30);
 
 }
 
@@ -36,9 +37,6 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
-    float output = test.getHeading();
-    Brain.Screen.setCursor(5,1);
-    Brain.Screen.print(output);
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
