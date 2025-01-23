@@ -6,17 +6,21 @@ forward2(forward2),
 lateral(lateral)
 {}
 
-float Odom::get_current_X_position(rotation lateral){
-    return lateral.position(degrees);
+
+float Odom::get_X_position(){
+    return x_pos;
 }
 
-float Odom::get_current_Y_position(rotation forward){
-    return forward.position(degrees);
+float Odom::get_Y_position(){
+    return y_pos;
 }
 
-void Odom::go_to_position(float x_pos, float y_pos, rotation forward1, rotation forward2, rotation lateral){
-    float avgFwdPos;
+void Odom::set_X_position(rotation lateral){
+    x_pos += lateral.position(degrees);
+}
 
+void Odom::set_Y_position(rotation forward){
+    y_pos += forward.position(degrees);
 }
 
 void Odom::reset_position(rotation lateral){

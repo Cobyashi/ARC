@@ -97,3 +97,48 @@ void Drive::drive_distance(float distance)
 void Drive::turn_angle(){}
 
 void Drive::turn_to_angle(){}
+
+void Drive::drive_to(int x_pos, int y_pos, int facing){
+    Odom sensors(forward1, forward2, lateral);
+    PID driveTurn(1, 0, 0, 100);
+    float output;
+
+    int curX = deg_to_inches(sensors.get_X_position());
+    int curY = deg_to_inches(sensors.get_Y_position());
+    int distX = x_pos - curX;
+    int distY = y_pos - curY;
+    int driveAngle = atan(distX/distY) * 180 / M_PI;
+    int driveDist = sqrt(pow(distX, 2) + pow(distY, 2));
+
+    while(distX > 0){
+        curX = deg_to_inches(sensors.get_X_position());
+        curY = deg_to_inches(sensors.get_Y_position());
+        distX = x_pos - curX;
+        distY = y_pos - curY;
+        
+        //Turning left
+        if(distX < 0){
+            output = driveTurn.compute(distX);
+            output = clamp(output, -max_voltage, max_voltage);
+            right_drive.spin(forward, 12, volt);
+            left_drive.spin(forward, (12.0-output), volt);
+        }
+        //Turning right
+        else{
+            output = driveTurn.compute(distX);
+            output = clamp(output, -max_voltage, max_voltage);
+            left_drive.spin(forward, 12, volt);
+            right_drive.spin(forward, (12.0-output), volt);
+        }
+    }
+    while(distY > 0){
+        curX = deg_to_inches(sensors.get_X_position());
+        curY = deg_to_inches(sensors.get_Y_position());
+        distX = x_pos - curX;
+        distY = y_pos - curY;
+
+        left_drive.spin(forward, 12, volt);
+        right_drive.spin(forward, 12, volt);
+    }
+    
+}

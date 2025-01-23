@@ -28,4 +28,5 @@ class Drive
 
     void turn_angle();
     void turn_to_angle();
+    void drive_to(int x_pos, int y_pos, int facing);
 };
